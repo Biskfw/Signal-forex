@@ -27,7 +27,7 @@ jobs:
       - name: Add Android platform
         run: cordova platform add android@latest
 
-      - name: Install SDK & Build Tools
+      - name: Install Android SDK & Build Tools
         run: |
           sudo apt-get update
           sudo apt-get install -y openjdk-17-jdk wget unzip
@@ -40,7 +40,10 @@ jobs:
           sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
 
       - name: Build APK
-        run: cordova build android --release
+        run: |
+          export ANDROID_HOME=$HOME/android-sdk
+          export PATH=$ANDROID_HOME/cmdline-tools/tools/bin:$ANDROID_HOME/platform-tools:$PATH
+          cordova build android --release
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
