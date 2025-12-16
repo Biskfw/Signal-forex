@@ -1,4 +1,4 @@
-name: Build Cordova Android APK
+name: signal forex APK
 
 on:
   push:
